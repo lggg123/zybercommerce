@@ -23,6 +23,19 @@ module.exports = {
           '100% ': { opacity: 0.2 }
         }
       },
+      colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        white: '#ffffff',
+        purple: '#3f3cbb',
+        midnight: '#121063',
+        metal: '#565584',
+        tahiti: '#3ab7bf',
+        silver: '#ecebff',
+        'bubble-gum': '#ff77e9',
+        bermuda: '#78dcca',
+        announcement: '#594d1e'
+      },
       animation: {
         fadeIn: 'fadeIn .3s ease-in-out',
         carousel: 'marquee 60s linear infinite',

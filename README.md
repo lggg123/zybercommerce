@@ -40,6 +40,8 @@ Vercel is happy to partner and work with any commerce provider to help them get 
 
 Integrations enable upgraded or additional functionality for Next.js Commerce
 
+https://vercel.com/docs/integrations/shopify
+
 - [Orama](https://github.com/oramasearch/nextjs-commerce) ([Demo](https://vercel-commerce.oramasearch.com/))
   - Upgrades search to include typeahead with dynamic re-rendering, vector-based similarity search, and JS-based configuration.
   - Search runs entirely in the browser for smaller catalogs or on a CDN for larger.
