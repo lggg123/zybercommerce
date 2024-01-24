@@ -1,6 +1,7 @@
 import { Carousel } from 'components/carousel';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import Footer from 'components/layout/footer';
+import { Gallery } from 'components/product/gallery';
 import { Suspense } from 'react';
 
 export const runtime = 'edge';
@@ -17,6 +18,7 @@ export default async function HomePage() {
     <>
       <ThreeItemGrid />
       <Suspense>
+        <Gallery images={[]} />
         <Carousel />
         <Suspense>
           <Footer />
