@@ -34,7 +34,7 @@ export const metadata = {
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <div className="bg-yellow-500 text-center">
-      <AnnouncementBar message="Kostenloser Versand in Deutschland" />
+      <AnnouncementBar />
       <Navbar />
       <Suspense>
         <main>{children}</main>
