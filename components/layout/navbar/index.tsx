@@ -9,7 +9,7 @@ import MobileMenu from './mobile-menu';
 const { SITE_NAME } = process.env;
 
 export default async function Navbar() {
-  const menu = await getMenu('next-js-frontend-header-menu');
+  const menu = await getMenu('main-menu');
 
   return (
     <nav className="relative sticky flex items-center justify-between p-4 lg:px-6">
