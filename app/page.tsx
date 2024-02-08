@@ -1,5 +1,6 @@
 import { Carousel } from 'components/carousel';
 import Footer from 'components/layout/footer';
+import Hero from 'components/layout/hero';
 import { Suspense } from 'react';
 
 export const runtime = 'edge';
@@ -14,7 +15,7 @@ export const metadata = {
 export default async function HomePage() {
   return (
     <>
-      {/* <Hero /> */}
+      <Hero />
       <Suspense>
         <Carousel />
         <Suspense>

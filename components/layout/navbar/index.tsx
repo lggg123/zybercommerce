@@ -26,7 +26,6 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className="hidden justify-center space-x-4 md:flex md:w-1/3">
-          {/* <Search /> */}
           {menu.length ? (
             <ul className="text-md hidden gap-6 md:flex md:items-center">
               {menu.map((item: Menu) => (
