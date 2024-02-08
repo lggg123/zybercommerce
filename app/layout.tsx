@@ -1,4 +1,3 @@
-import AnnouncementBar from 'components/layout/announcement';
 import Navbar from 'components/layout/navbar';
 import { ensureStartsWith } from 'lib/utils';
 import { ReactNode, Suspense } from 'react';
@@ -34,7 +33,7 @@ export const metadata = {
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <div className="bg-yellow-500 text-center">
-      <AnnouncementBar />
+      {/* <AnnouncementBar /> */}
       <Navbar />
       <Suspense>
         <main>{children}</main>
