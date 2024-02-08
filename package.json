@@ -24,6 +24,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@types/async-eventemitter": "^0.2.4",
+    "@types/bn.js": "^5.1.5",
+    "@types/glob": "^8.1.0",
+    "@types/json-schema": "^7.0.15",
+    "@types/lru-cache": "^7.10.10",
     "async-eventemitter": "^0.2.4",
     "clsx": "^2.0.0",
     "geist": "^1.0.0",
