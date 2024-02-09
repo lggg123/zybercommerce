@@ -1,20 +1,31 @@
+'use client';
+
 import Cart from 'components/cart';
 import OpenCart from 'components/cart/open-cart';
 import LogoSquare from 'components/logo-square';
 import { getMenu } from 'lib/shopify';
 import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import MobileMenu from './mobile-menu';
 const { SITE_NAME } = process.env;
 
-export default async function Navbar() {
-  const menu = await getMenu('main-menu');
+export default function Navbar() {
+  const [menu, setMenu] = useState<Menu[] | null>(null);
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      const result = await getMenu('main-menu');
+      setMenu(result);
+    };
+
+    fetchMenu();
+  }, []);
 
   return (
     <nav className="relative sticky flex items-center justify-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">
-        <MobileMenu menu={menu} />
+        <MobileMenu menu={menu || []} />
       </div>
       <div className="flex w-full items-center">
         <div className="flex w-full md:w-1/3">
@@ -26,7 +37,7 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className="hidden justify-center space-x-4 md:flex md:w-1/3">
-          {menu.length ? (
+          {menu && menu.length ? (
             <ul className="text-md hidden gap-6 md:flex md:items-center">
               {menu.map((item: Menu) => (
                 <li key={item.title}>

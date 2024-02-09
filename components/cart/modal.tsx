@@ -19,12 +19,18 @@ type MerchandiseSearchParams = {
 };
 
 export default function CartModal({ cart }: { cart: Cart | undefined }) {
+  console.log('Rendering cart with', { cart });
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
 
   useEffect(() => {
+    console.log('Running effect with', {
+      isOpen,
+      cartQuantity: cart?.totalQuantity,
+      refQuantity: quantityRef.current
+    });
     // Open cart modal when quantity changes.
     if (cart?.totalQuantity !== quantityRef.current) {
       // But only if it's not already open (quantity also changes when editing items in cart).

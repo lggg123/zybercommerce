@@ -255,6 +255,7 @@ export async function updateCart(
 }
 
 export async function getCart(cartId: string): Promise<Cart | undefined> {
+  console.log('Fetch cart with cart ID', cartId);
   const res = await shopifyFetch<ShopifyCartOperation>({
     query: getCartQuery,
     variables: { cartId },
@@ -262,12 +263,17 @@ export async function getCart(cartId: string): Promise<Cart | undefined> {
     cache: 'no-store'
   });
 
+  console.log('Fetched cart', res.body.data.cart);
+
   // Old carts becomes `null` when you checkout.
   if (!res.body.data.cart) {
     return undefined;
   }
 
-  return reshapeCart(res.body.data.cart);
+  const reshapedCart = reshapeCart(res.body.data.cart);
+  console.log('Reshaped cart:', reshapedCart); // Log the reshaped cart
+
+  return reshapedCart;
 }
 
 export async function getCollection(handle: string): Promise<Collection | undefined> {

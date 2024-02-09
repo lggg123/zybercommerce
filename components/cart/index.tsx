@@ -1,14 +1,27 @@
 import { getCart } from 'lib/shopify';
-import { cookies } from 'next/headers';
+import { Cart } from 'lib/shopify/types';
+import { GetServerSideProps } from 'next';
 import CartModal from './modal';
 
-export default async function Cart() {
-  const cartId = cookies().get('cartId')?.value;
+type CartProps = {
+  cart: Cart | undefined;
+};
+
+export default function Cart({ cart }: CartProps) {
+  return <CartModal cart={cart} />;
+}
+
+export const getServerSideProps: GetServerSideProps<CartProps> = async (context) => {
+  const cartId = context.req.cookies.cartId;
   let cart;
 
   if (cartId) {
     cart = await getCart(cartId);
   }
 
-  return <CartModal cart={cart} />;
-}
+  return {
+    props: {
+      cart
+    }
+  };
+};
