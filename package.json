@@ -22,8 +22,16 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
     "@types/async-eventemitter": "^0.2.4",
     "@types/bn.js": "^5.1.5",
     "@types/glob": "^8.1.0",

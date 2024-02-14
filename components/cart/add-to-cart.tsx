@@ -10,10 +10,12 @@ import { useFormState, useFormStatus } from 'react-dom';
 
 function SubmitButton({
   availableForSale,
-  selectedVariantId
+  selectedVariantId,
+  actionWithVariant
 }: {
   availableForSale: boolean;
   selectedVariantId: string | undefined;
+  actionWithVariant: () => void;
 }) {
   const { pending } = useFormStatus();
   const buttonClasses =
@@ -46,7 +48,9 @@ function SubmitButton({
   return (
     <button
       onClick={(e: React.FormEvent<HTMLButtonElement>) => {
-        if (pending) e.preventDefault();
+        e.preventDefault(); // Prevent default form submission behavior
+        console.log('Button clicked');
+        actionWithVariant();
       }}
       aria-label="Add to cart"
       aria-disabled={pending}
@@ -73,20 +77,30 @@ export function AddToCart({
   const [message, formAction] = useFormState(addItem, null);
   const searchParams = useSearchParams();
   const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
-  const variant = variants.find((variant: ProductVariant) =>
-    variant.selectedOptions.every(
-      (option) => option.value === searchParams.get(option.name.toLowerCase())
-    )
-  );
+  const variant = variants.find((variant: ProductVariant) => {
+    const searchParamsArray = Array.from(searchParams.entries());
+    return searchParamsArray.every(([paramName, paramValue]) => {
+      const option = variant.selectedOptions.find(
+        (option) => option.name.toLowerCase() === paramName && option.value === paramValue
+      );
+      return option !== undefined;
+    });
+  });
   const selectedVariantId = variant?.id || defaultVariantId;
-  const actionWithVariant = formAction.bind(null, selectedVariantId);
+  const actionWithVariant = selectedVariantId ? formAction.bind(null, selectedVariantId) : () => {};
 
-  return (
+  console.log('Search Params:', Array.from(searchParams.entries()));
+
+  return selectedVariantId ? (
     <form action={actionWithVariant}>
-      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} />
+      <SubmitButton
+        availableForSale={availableForSale}
+        selectedVariantId={selectedVariantId}
+        actionWithVariant={actionWithVariant}
+      />
       <p aria-live="polite" className="sr-only" role="status">
         {message}
       </p>
     </form>
-  );
+  ) : null;
 }

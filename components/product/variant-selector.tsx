@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { ProductOption, ProductVariant } from 'lib/shopify/types';
 import { createUrl } from 'lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 type Combination = {
   id: string;
@@ -38,6 +39,11 @@ export function VariantSelector({
     )
   }));
 
+  useEffect(() => {
+    // Update the state of the selected options here
+    // based on the current URL
+  }, [pathname, searchParams]);
+
   return options.map((option) => (
     <dl className="mb-8" key={option.id}>
       <dt className="mb-4 text-sm uppercase tracking-wide">{option.name}</dt>
@@ -67,11 +73,18 @@ export function VariantSelector({
               (option) => option.name.toLowerCase() === key && option.values.includes(value)
             )
           );
-          const isAvailableForSale = combinations.find((combination) =>
-            filtered.every(
-              ([key, value]) => combination[key] === value && combination.availableForSale
-            )
-          );
+          // const isAvailableForSale = combinations.find((combination) =>
+          //   filtered.every(
+          //     ([key, value]) => combination[key] === value && combination.availableForSale
+          //   )
+          // );
+          const isAvailableForSale =
+            filtered.length === 0 ||
+            combinations.find((combination) =>
+              filtered.every(
+                ([key, value]) => combination[key] === value && combination.availableForSale
+              )
+            );
 
           // The option is active if it's in the url params.
           const isActive = searchParams.get(optionNameLowerCase) === value;
@@ -82,7 +95,9 @@ export function VariantSelector({
               aria-disabled={!isAvailableForSale}
               disabled={!isAvailableForSale}
               onClick={() => {
-                router.replace(optionUrl, { scroll: false });
+                console.log('Variant clicked');
+                console.log('router', router);
+                router.push(optionUrl, { scroll: false });
               }}
               title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
               className={clsx(
